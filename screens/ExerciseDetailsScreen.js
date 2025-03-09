@@ -28,7 +28,7 @@ const ExerciseDetailsScreen = ({ route, navigation }) => {
   }
 
   const addToWorkout = () => {
-    navigation.navigate("MyWorkouts", {
+    navigation.navigate("Histórico", {
       exercise: { ...exerciseDetails },
     });
 

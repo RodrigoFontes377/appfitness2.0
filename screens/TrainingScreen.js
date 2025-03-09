@@ -15,7 +15,7 @@ const TrainingScreen = ({ navigation }) => {
   const [bodyPartList, setBodyPartList] = useState([]);
 
   useEffect(() => {
-    const fetchBodyPartList = async () => {
+    const fetchBodyParts = async () => {
       try {
         const response = await api.get("/bodyPartList");
         setBodyPartList(response.data);
@@ -23,12 +23,12 @@ const TrainingScreen = ({ navigation }) => {
         console.error("Erro ao buscar partes do corpo:", error);
       }
     };
-    fetchBodyPartList();
+    fetchBodyParts();
   }, []);
 
   useEffect(() => {
     if (selectedBodyPart) {
-      const fetchExercisesByBodyPart = async () => {
+      const fetchExercises = async () => {
         try {
           const response = await api.get(`/bodyPart/${selectedBodyPart}`);
           setExercises(response.data);
@@ -36,21 +36,19 @@ const TrainingScreen = ({ navigation }) => {
           console.error("Erro ao buscar exercícios:", error);
         }
       };
-      fetchExercisesByBodyPart();
+      fetchExercises();
     }
   }, [selectedBodyPart]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Plano de Treino</Text>
-      <Text style={styles.bodyText}>Escolha a parte do corpo:</Text>
-
+      <Text style={styles.title}>Escolha sua Rotina</Text>
       <Picker
         selectedValue={selectedBodyPart}
         style={styles.picker}
         onValueChange={(itemValue) => setSelectedBodyPart(itemValue)}
       >
-        <Picker.Item label="Selecione" value="" />
+        <Picker.Item label="Selecione uma parte do corpo" value="" />
         {bodyPartList.map((bodyPart, index) => (
           <Picker.Item key={index} label={bodyPart} value={bodyPart} />
         ))}
@@ -83,12 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
-  bodyText: {
-    fontSize: 18,
-    color: "#666",
-    marginBottom: 20,
-    textAlign: "center",
-  },
+  picker: { height: 50, width: "100%", marginBottom: 20 },
   item: {
     backgroundColor: "#f0f0f0",
     padding: 15,
@@ -97,7 +90,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   itemText: { fontSize: 18, color: "#333" },
-  picker: { height: 50, width: "100%", marginBottom: 20 },
 });
 
 export default TrainingScreen;

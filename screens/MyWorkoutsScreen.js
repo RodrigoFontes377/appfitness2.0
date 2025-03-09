@@ -131,7 +131,7 @@ const MyWorkoutsScreen = ({ route }) => {
       {/* Botão para adicionar novo exercício */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Training")}
+        onPress={() => navigation.navigate("Treinos")}
       >
         <Ionicons name="add" size={24} color="white" />
         <Text style={styles.buttonText}>Adicionar Exercício</Text>

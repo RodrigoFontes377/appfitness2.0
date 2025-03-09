@@ -1,21 +1,26 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bem-vindo ao AppFitness 2.0!</Text>
+      <Text style={styles.title}>🏋️‍♂️ Bem-vindo ao AppFitness 2.0!</Text>
+      <Text style={styles.subtitle}>
+        Escolha seu treino ou acompanhe seu histórico!
+      </Text>
+
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Training")}
+        onPress={() => navigation.navigate("Treinos")}
       >
-        <Ionicons name="fitness" size={24} color="white" />
+        <Ionicons name="barbell" size={24} color="white" />
         <Text style={styles.buttonText}>Plano de Treino</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("MyWorkouts")}
+        onPress={() => navigation.navigate("Histórico")}
       >
         <Ionicons name="time" size={24} color="white" />
         <Text style={styles.buttonText}>Ver Histórico</Text>
@@ -33,10 +38,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "bold",
     color: "#333",
-    marginBottom: 40,
+    marginBottom: 20,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "#777",
+    textAlign: "center",
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#4CAF50",
