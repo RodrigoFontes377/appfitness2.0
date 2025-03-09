@@ -1,67 +1,103 @@
-import React from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import api from "../services/api";
 
 const TrainingScreen = ({ navigation }) => {
+  const [exercises, setExercises] = useState([]);
+  const [selectedBodyPart, setSelectedBodyPart] = useState("");
+  const [bodyPartList, setBodyPartList] = useState([]);
+
+  useEffect(() => {
+    const fetchBodyPartList = async () => {
+      try {
+        const response = await api.get("/bodyPartList");
+        setBodyPartList(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar partes do corpo:", error);
+      }
+    };
+    fetchBodyPartList();
+  }, []);
+
+  useEffect(() => {
+    if (selectedBodyPart) {
+      const fetchExercisesByBodyPart = async () => {
+        try {
+          const response = await api.get(`/bodyPart/${selectedBodyPart}`);
+          setExercises(response.data);
+        } catch (error) {
+          console.error("Erro ao buscar exercícios:", error);
+        }
+      };
+      fetchExercisesByBodyPart();
+    }
+  }, [selectedBodyPart]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Plano de Treino</Text>
-      <Text style={styles.bodyText}>
-        Aqui você pode ver o seu plano de treino personalizado.
-      </Text>
+      <Text style={styles.bodyText}>Escolha a parte do corpo:</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}
+      <Picker
+        selectedValue={selectedBodyPart}
+        style={styles.picker}
+        onValueChange={(itemValue) => setSelectedBodyPart(itemValue)}
       >
-        <Ionicons name="arrow-back" size={24} color="white" />
-        <Text style={styles.buttonText}>Voltar para Home</Text>
-      </TouchableOpacity>
+        <Picker.Item label="Selecione" value="" />
+        {bodyPartList.map((bodyPart, index) => (
+          <Picker.Item key={index} label={bodyPart} value={bodyPart} />
+        ))}
+      </Picker>
+
+      <FlatList
+        data={exercises}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() =>
+              navigation.navigate("ExerciseDetails", { exercise: item })
+            }
+          >
+            <Text style={styles.itemText}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
+  container: { flex: 1, backgroundColor: "#fff", padding: 20 },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     color: "#333",
     marginBottom: 20,
+    textAlign: "center",
   },
   bodyText: {
     fontSize: 18,
     color: "#666",
-    marginBottom: 40,
+    marginBottom: 20,
     textAlign: "center",
   },
-  button: {
-    backgroundColor: "#4CAF50",
-    borderRadius: 30,
-    paddingVertical: 15,
-    paddingHorizontal: 25,
+  item: {
+    backgroundColor: "#f0f0f0",
+    padding: 15,
     marginVertical: 10,
-    flexDirection: "row",
-    justifyContent: "center",
+    borderRadius: 10,
     alignItems: "center",
-    width: "80%",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 15,
   },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
+  itemText: { fontSize: 18, color: "#333" },
+  picker: { height: 50, width: "100%", marginBottom: 20 },
 });
 
 export default TrainingScreen;

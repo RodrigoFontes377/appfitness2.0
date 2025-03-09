@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Para adicionar ícones
-
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -16,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("History")}
+        onPress={() => navigation.navigate("MyWorkouts")}
       >
         <Ionicons name="time" size={24} color="white" />
         <Text style={styles.buttonText}>Ver Histórico</Text>

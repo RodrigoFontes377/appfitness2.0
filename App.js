@@ -3,7 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import TrainingScreen from "./screens/TrainingScreen";
-import HistoryScreen from "./screens/HistoryScreen";
+import MyWorkoutsScreen from "./screens/MyWorkoutsScreen";
+import ExerciseDetailsScreen from "./screens/ExerciseDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -13,7 +14,11 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Training" component={TrainingScreen} />
-        <Stack.Screen name="History" component={HistoryScreen} />
+        <Stack.Screen name="MyWorkouts" component={MyWorkoutsScreen} />
+        <Stack.Screen
+          name="ExerciseDetails"
+          component={ExerciseDetailsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
