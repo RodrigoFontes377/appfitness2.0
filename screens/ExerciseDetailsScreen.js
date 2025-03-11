@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 
 const ExerciseDetailsScreen = ({ route, navigation }) => {
   const { exercise } = route.params || {};
@@ -28,10 +29,12 @@ const ExerciseDetailsScreen = ({ route, navigation }) => {
   }
 
   const addToWorkout = () => {
-    navigation.navigate("Histórico", {
+    navigation.navigate("Ficha de Treino", {
       exercise: { ...exerciseDetails },
     });
 
+    // Voltar para a tela inicial da lista de exercícios
+    navigation.navigate("Exercícios");
     Alert.alert("✅ Sucesso", "Exercício adicionado ao seu treino!");
   };
 
@@ -62,7 +65,7 @@ const ExerciseDetailsScreen = ({ route, navigation }) => {
       </ScrollView>
 
       <TouchableOpacity style={styles.button} onPress={addToWorkout}>
-        <Text style={styles.buttonText}>➕ Adicionar ao Treino</Text>
+        <Text style={styles.buttonText}>+ Adicionar ao Treino</Text>
       </TouchableOpacity>
     </View>
   );

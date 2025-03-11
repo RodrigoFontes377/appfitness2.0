@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 // 🔹 Stack de Treinos (Treinos + Detalhes)
 const TrainingStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="Treinos" component={TrainingScreen} />
+    <Stack.Screen name="TrainingScreen" component={TrainingScreen} />
     <Stack.Screen name="ExerciseDetails" component={ExerciseDetailsScreen} />
   </Stack.Navigator>
 );
@@ -28,8 +28,8 @@ export default function App() {
           tabBarIcon: ({ color, size }) => {
             let iconName;
             if (route.name === "Início") iconName = "home";
-            else if (route.name === "Treinos") iconName = "barbell";
-            else if (route.name === "Histórico") iconName = "time";
+            else if (route.name === "Exercícios") iconName = "barbell";
+            else if (route.name === "Ficha de Treino") iconName = "time";
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -43,8 +43,8 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Início" component={HomeScreen} />
-        <Tab.Screen name="Treinos" component={TrainingStack} />
-        <Tab.Screen name="Histórico" component={MyWorkoutsScreen} />
+        <Tab.Screen name="Exercícios" component={TrainingStack} />
+        <Tab.Screen name="Ficha de Treino" component={MyWorkoutsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -99,7 +99,10 @@ const MyWorkoutsScreen = ({ route }) => {
       <TouchableOpacity
         style={styles.exerciseTextContainer}
         onPress={() =>
-          navigation.navigate("ExerciseDetails", { exercise: item })
+          navigation.navigate("Exercícios", {
+            screen: "ExerciseDetails",
+            params: { exercise: item },
+          })
         }
       >
         <Text style={styles.exerciseText}>{item.name}</Text>
@@ -128,10 +131,11 @@ const MyWorkoutsScreen = ({ route }) => {
         <Text style={styles.emptyText}>📭 Nenhum exercício adicionado.</Text>
       )}
 
-      {/* Botão para adicionar novo exercício */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Treinos")}
+        onPress={() => {
+          navigation.navigate("Exercícios"); // Alterar para usar navigate
+        }}
       >
         <Ionicons name="add" size={24} color="white" />
         <Text style={styles.buttonText}>Adicionar Exercício</Text>

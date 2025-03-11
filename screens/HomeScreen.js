@@ -6,24 +6,22 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🏋️‍♂️ Bem-vindo ao AppFitness 2.0!</Text>
-      <Text style={styles.subtitle}>
-        Escolha seu treino ou acompanhe seu histórico!
-      </Text>
+      <Text style={styles.subtitle}>Monte o seu próprio treino!</Text>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Treinos")}
+        onPress={() => navigation.navigate("Exercícios")}
       >
         <Ionicons name="barbell" size={24} color="white" />
-        <Text style={styles.buttonText}>Plano de Treino</Text>
+        <Text style={styles.buttonText}>Exercícios</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Histórico")}
+        onPress={() => navigation.navigate("Ficha de Treino")}
       >
         <Ionicons name="time" size={24} color="white" />
-        <Text style={styles.buttonText}>Ver Histórico</Text>
+        <Text style={styles.buttonText}>Ficha de Treino</Text>
       </TouchableOpacity>
     </View>
   );

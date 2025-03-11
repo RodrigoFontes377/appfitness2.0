@@ -61,7 +61,10 @@ const TrainingScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.item}
             onPress={() =>
-              navigation.navigate("ExerciseDetails", { exercise: item })
+              navigation.navigate("Exercícios", {
+                screen: "ExerciseDetails",
+                params: { exercise: item },
+              })
             }
           >
             <Text style={styles.itemText}>{item.name}</Text>
